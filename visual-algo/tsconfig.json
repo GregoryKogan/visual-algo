@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/algos/BubbleSort.js"  ],
   "exclude": [
     "node_modules"
   ]
