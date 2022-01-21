@@ -112,25 +112,22 @@ export class BubbleSortSketch {
   }
 
   bubbleSortStep(): void {
-    if (this.i == this.j && this.i == this.n) {
+    if (this.j >= this.n - 1) {
       this.finished = true;
       return;
     }
 
-    if (this.j < this.n) this.j++;
-    else {
-      this.i++;
-      this.j = this.i;
-      return;
-    }
-
-    if (this.i < this.n && this.j < this.n) {
+    this.i++;
+    if (this.i < this.n - this.j) {
       this.compsCounter++;
-      if (this.values[this.i] > this.values[this.j]) {
-        const tmp = this.values[this.i];
-        this.values[this.i] = this.values[this.j];
-        this.values[this.j] = tmp;
+      if (this.values[this.i - 1] > this.values[this.i]) {
+        const tmp = this.values[this.i - 1];
+        this.values[this.i - 1] = this.values[this.i];
+        this.values[this.i] = tmp;
       }
+    } else {
+      this.i = 0;
+      this.j++;
     }
   }
 }
