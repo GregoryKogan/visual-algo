@@ -125,8 +125,8 @@ export class BubbleSortSketch {
     }
 
     if (this.i < this.n && this.j < this.n) {
+      this.compsCounter++;
       if (this.values[this.i] > this.values[this.j]) {
-        this.compsCounter++;
         const tmp = this.values[this.i];
         this.values[this.i] = this.values[this.j];
         this.values[this.j] = tmp;
