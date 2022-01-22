@@ -1,13 +1,16 @@
 <template>
   <div class="sort-page">
     <h1 style="margin-top: 20px">
-      <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble Sort</a>
+      <a href="https://en.wikipedia.org/wiki/Pancake_sorting">Pancake Sort</a>
     </h1>
     <h3>Time complexity O(n²)</h3>
+    <h3>Flip operations O(n)</h3>
     <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
     <div class="stats">
       <v-col>
-        <span>{{ this.sketch.compsCounter }} comparisons</span>
+        <span>{{ this.sketch.flipsCounter }} flips</span>
+        <v-spacer></v-spacer>
+        <span>{{ this.sketch.itersCounter }} iterations</span>
         <v-spacer></v-spacer>
         <span v-if="this.sketch.values"
           >N: {{ this.sketch.values.length }}</span
@@ -56,22 +59,22 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { BubbleSortSketch } from "../algos/BubbleSort";
+import { PancakeSortSketch } from "../algos/PancakeSort";
 import { Painter } from "../utilities/painter";
 
 export default Vue.extend({
-  name: "BubbleSort",
+  name: "PancakeSort",
   data: () => ({
     canvasWidth: 2000,
     canvasHeight: 1125,
-    sketch: {} as BubbleSortSketch,
+    sketch: {} as PancakeSortSketch,
     n: 100,
     stepsPerFrame: 5,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
     if (canvas && Painter.isCanvas(canvas)) {
-      this.sketch = new BubbleSortSketch(canvas);
+      this.sketch = new PancakeSortSketch(canvas);
       this.sketch.setup();
     }
   },

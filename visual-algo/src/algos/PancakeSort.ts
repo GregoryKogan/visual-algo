@@ -1,7 +1,7 @@
 import { Painter } from "@/utilities/painter";
 import { shuffle } from "@/utilities/shuffle";
 
-export class SelectionSortSketch {
+export class PancakeSortSketch {
   painter: Painter;
   width: number;
   height: number;
@@ -14,10 +14,14 @@ export class SelectionSortSketch {
 
   values: Array<number>;
   n: number;
+  curSize: number;
+  maxInd: number;
   i: number;
   j: number;
-  minInd: number;
-  compsCounter: number;
+  firstFlip: boolean;
+  secondFlip: boolean;
+  flipsCounter: number;
+  itersCounter: number;
   stepsPerFrame: number;
   finished: boolean;
 
@@ -35,10 +39,14 @@ export class SelectionSortSketch {
 
     this.values = [];
     this.n = 100;
+    this.curSize = this.n;
+    this.maxInd = 0;
     this.i = 0;
     this.j = 0;
-    this.minInd = 0;
-    this.compsCounter = 0;
+    this.firstFlip = false;
+    this.secondFlip = false;
+    this.flipsCounter = 0;
+    this.itersCounter = 0;
     this.stepsPerFrame = 5;
     this.finished = false;
   }
@@ -49,11 +57,15 @@ export class SelectionSortSketch {
       this.stepsPerFrame = data.stepsPerFrame;
     }
 
-    this.finished = false;
+    this.curSize = this.n;
+    this.maxInd = 0;
     this.i = 0;
-    this.j = 1;
-    this.minInd = 0;
-    this.compsCounter = 0;
+    this.j = 0;
+    this.firstFlip = false;
+    this.secondFlip = false;
+    this.finished = false;
+    this.flipsCounter = 0;
+    this.itersCounter = 0;
     this.values = [];
     for (let i = 1; i <= this.n; ++i) this.values.push(i);
     shuffle(this.values);
@@ -64,7 +76,7 @@ export class SelectionSortSketch {
   draw(): void {
     this.painter.background("#282a36");
 
-    for (let i = 0; i < this.stepsPerFrame; ++i) this.selectionSortStep();
+    for (let i = 0; i < this.stepsPerFrame; ++i) this.pancakeSortStep();
 
     this.renderValues();
 
@@ -100,10 +112,11 @@ export class SelectionSortSketch {
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.i) this.painter.stroke("#8be9fd");
-      if (i == this.j) this.painter.stroke("#ffb86c");
-      if (i == this.minInd) this.painter.stroke("#ff5555");
-      if ((i == this.i || i == this.j || i == this.minInd) && !this.finished)
+      if (i == this.curSize) this.painter.stroke("#ff79c6");
+      else if (i == this.i) this.painter.stroke("#8be9fd");
+      else if (i == this.j) this.painter.stroke("#ffb86c");
+      else if (i == this.maxInd) this.painter.stroke("#ff5555");
+      if ((i == this.curSize || i == this.i || i == this.j) && !this.finished)
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
       if (this.finished) this.painter.stroke("#50fa7b");
       const curHeight = ratio * this.values[i];
@@ -116,24 +129,47 @@ export class SelectionSortSketch {
     }
   }
 
-  selectionSortStep(): void {
-    if (this.i >= this.n - 1) {
+  pancakeSortStep(): void {
+    if (this.curSize <= 1) {
       this.finished = true;
       return;
     }
 
-    if (this.j < this.n) {
-      this.j++;
-      this.compsCounter++;
-      if (this.values[this.j] < this.values[this.minInd]) this.minInd = this.j;
-    } else {
-      const tmp = this.values[this.i];
-      this.values[this.i] = this.values[this.minInd];
-      this.values[this.minInd] = tmp;
+    this.itersCounter++;
 
+    if (this.i < this.curSize - 1) {
       this.i++;
-      this.minInd = this.i;
-      this.j = this.i;
+      if (this.values[this.i] > this.values[this.maxInd]) this.maxInd = this.i;
+    } else {
+      if (!this.firstFlip) {
+        if (this.j < Math.floor((this.maxInd + 1) / 2)) {
+          const tmp = this.values[this.j];
+          this.values[this.j] = this.values[this.maxInd - this.j];
+          this.values[this.maxInd - this.j] = tmp;
+          this.j++;
+        } else {
+          this.firstFlip = true;
+          this.flipsCounter++;
+          this.j = 0;
+        }
+      } else if (!this.secondFlip) {
+        if (this.j < Math.floor(this.curSize / 2)) {
+          const tmp = this.values[this.j];
+          this.values[this.j] = this.values[this.curSize - this.j - 1];
+          this.values[this.curSize - this.j - 1] = tmp;
+          this.j++;
+        } else {
+          this.secondFlip = true;
+          this.flipsCounter++;
+          this.j = 0;
+        }
+      } else {
+        this.i = 0;
+        this.curSize--;
+        this.maxInd = 0;
+        this.firstFlip = false;
+        this.secondFlip = false;
+      }
     }
   }
 }

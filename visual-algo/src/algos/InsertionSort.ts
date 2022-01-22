@@ -1,7 +1,7 @@
 import { Painter } from "@/utilities/painter";
 import { shuffle } from "@/utilities/shuffle";
 
-export class SelectionSortSketch {
+export class InsertionSortSketch {
   painter: Painter;
   width: number;
   height: number;
@@ -16,7 +16,7 @@ export class SelectionSortSketch {
   n: number;
   i: number;
   j: number;
-  minInd: number;
+  key: number;
   compsCounter: number;
   stepsPerFrame: number;
   finished: boolean;
@@ -35,9 +35,9 @@ export class SelectionSortSketch {
 
     this.values = [];
     this.n = 100;
-    this.i = 0;
+    this.i = 1;
     this.j = 0;
-    this.minInd = 0;
+    this.key = 0;
     this.compsCounter = 0;
     this.stepsPerFrame = 5;
     this.finished = false;
@@ -50,13 +50,13 @@ export class SelectionSortSketch {
     }
 
     this.finished = false;
-    this.i = 0;
-    this.j = 1;
-    this.minInd = 0;
+    this.i = 1;
+    this.j = 0;
     this.compsCounter = 0;
     this.values = [];
     for (let i = 1; i <= this.n; ++i) this.values.push(i);
     shuffle(this.values);
+    this.key = this.values[1];
 
     window.requestAnimationFrame(() => this.draw());
   }
@@ -64,7 +64,7 @@ export class SelectionSortSketch {
   draw(): void {
     this.painter.background("#282a36");
 
-    for (let i = 0; i < this.stepsPerFrame; ++i) this.selectionSortStep();
+    for (let i = 0; i < this.stepsPerFrame; ++i) this.insertionSortStep();
 
     this.renderValues();
 
@@ -102,8 +102,7 @@ export class SelectionSortSketch {
       this.painter.stroke("#f8f8f2");
       if (i == this.i) this.painter.stroke("#8be9fd");
       if (i == this.j) this.painter.stroke("#ffb86c");
-      if (i == this.minInd) this.painter.stroke("#ff5555");
-      if ((i == this.i || i == this.j || i == this.minInd) && !this.finished)
+      if ((i == this.i || i == this.j) && !this.finished)
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
       if (this.finished) this.painter.stroke("#50fa7b");
       const curHeight = ratio * this.values[i];
@@ -116,24 +115,21 @@ export class SelectionSortSketch {
     }
   }
 
-  selectionSortStep(): void {
-    if (this.i >= this.n - 1) {
+  insertionSortStep(): void {
+    if (this.i >= this.n) {
       this.finished = true;
       return;
     }
 
-    if (this.j < this.n) {
-      this.j++;
-      this.compsCounter++;
-      if (this.values[this.j] < this.values[this.minInd]) this.minInd = this.j;
+    this.compsCounter++;
+    if (this.j >= 0 && this.values[this.j] > this.key) {
+      this.values[this.j + 1] = this.values[this.j];
+      this.j--;
     } else {
-      const tmp = this.values[this.i];
-      this.values[this.i] = this.values[this.minInd];
-      this.values[this.minInd] = tmp;
-
+      this.values[this.j + 1] = this.key;
       this.i++;
-      this.minInd = this.i;
-      this.j = this.i;
+      this.key = this.values[this.i];
+      this.j = this.i - 1;
     }
   }
 }
