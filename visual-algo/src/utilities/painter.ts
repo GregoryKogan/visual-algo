@@ -92,6 +92,16 @@ export class Painter {
     }
   }
 
+  line(x1: number, y1: number, x2: number, y2: number): void {
+    if (!this.ctx) return;
+    this.ctx.lineWidth = this.strokeWeight;
+    this.ctx.strokeStyle = this.strokeStyle;
+    this.ctx.beginPath();
+    this.ctx.moveTo(x1, y1);
+    this.ctx.lineTo(x2, y2);
+    this.ctx.stroke();
+  }
+
   text(msg: string, x: number, y: number): void {
     this.ctx?.fillText(msg, x, y);
   }

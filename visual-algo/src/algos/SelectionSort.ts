@@ -97,23 +97,19 @@ export class SelectionSortSketch {
     for (let i = 1; i < this.n; ++i)
       if (this.values[i] > maxValue) maxValue = this.values[i];
     const ratio = maxHeight / maxValue;
-    if (colWidth > 1) {
-      this.painter.setStrokeWeight(1);
-      this.painter.stroke("#44475a");
-    } else this.painter.noStroke();
     for (let i = 0; i < this.n; ++i) {
-      this.painter.fill("#f8f8f2");
-      if (i == this.i) this.painter.fill("#8be9fd");
-      if (i == this.j) this.painter.fill("#ffb86c");
-      if (i == this.minInd) this.painter.fill("#ff5555");
-      if (this.finished) this.painter.fill("#50fa7b");
-
+      this.painter.stroke("#f8f8f2");
+      if (i == this.i) this.painter.stroke("#8be9fd");
+      if (i == this.j) this.painter.stroke("#ffb86c");
+      if (i == this.minInd) this.painter.stroke("#ff5555");
+      if (this.finished) this.painter.stroke("#50fa7b");
+      this.painter.setStrokeWeight(colWidth);
       const curHeight = ratio * this.values[i];
-      this.painter.rect(
-        i * colWidth,
+      this.painter.line(
+        i * colWidth + colWidth / 2,
         this.height - curHeight,
-        colWidth,
-        curHeight
+        i * colWidth + colWidth / 2,
+        this.height
       );
     }
   }
