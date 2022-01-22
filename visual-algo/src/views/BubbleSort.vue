@@ -1,6 +1,10 @@
 <template>
-  <div id="sort-page">
-    <h1 style="margin-bottom: 20px; margin-top: 20px">Bubble Sort</h1>
+  <div class="sort-page">
+    <h1 style="margin-top: 20px">
+      <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble Sort</a>
+    </h1>
+    <h3>Time complexity O(n²)</h3>
+    <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
     <div class="stats">
       <v-col>
         <span>{{ this.sketch.compsCounter }} comparisons</span>
@@ -75,10 +79,22 @@ export default Vue.extend({
 </script>
 
 <style>
-#sort-page {
+.sort-page {
   width: max(350px, min(90vw, 1300px));
   margin-left: auto;
   margin-right: auto;
+}
+
+.sort-page h1 a {
+  color: #ff79c6;
+  text-decoration: none;
+}
+.sort-page h1 a:hover {
+  text-decoration: underline;
+}
+.sort-page h1 a:active {
+  color: #8be9fd;
+  text-decoration: underline;
 }
 
 #sketch {
