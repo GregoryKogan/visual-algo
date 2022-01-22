@@ -9,6 +9,7 @@
       <button v-on:click="$router.push('BinaryInsertionSort')">
         BinaryInsertionSort
       </button>
+      <button v-on:click="$router.push('PancakeSort')">PancakeSort</button>
     </v-row>
   </div>
 </template>
@@ -36,7 +37,7 @@ export default Vue.extend({
 }
 
 .home-page h2 {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .home-page button {
