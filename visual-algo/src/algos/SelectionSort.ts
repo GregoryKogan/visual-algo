@@ -103,7 +103,7 @@ export class SelectionSortSketch {
       if (i == this.j) this.painter.stroke("#ffb86c");
       if (i == this.minInd) this.painter.stroke("#ff5555");
       if (this.finished) this.painter.stroke("#50fa7b");
-      this.painter.setStrokeWeight(colWidth);
+      this.painter.setStrokeWeight(colWidth + 1);
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

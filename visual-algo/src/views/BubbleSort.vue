@@ -62,8 +62,8 @@ import { Painter } from "../utilities/painter";
 export default Vue.extend({
   name: "BubbleSort",
   data: () => ({
-    canvasWidth: 1920,
-    canvasHeight: 1080,
+    canvasWidth: 2000,
+    canvasHeight: 1125,
     sketch: {} as BubbleSortSketch,
     n: 100,
     stepsPerFrame: 5,
