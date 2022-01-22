@@ -95,11 +95,13 @@ export class BubbleSortSketch {
       if (this.values[i] > maxValue) maxValue = this.values[i];
     const ratio = maxHeight / maxValue;
     for (let i = 0; i < this.n; ++i) {
+      this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
       if (i == this.i) this.painter.stroke("#8be9fd");
       if (i == this.n - this.j) this.painter.stroke("#ffb86c");
+      if ((i == this.i || i == this.n - this.j) && !this.finished)
+        this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
       if (this.finished) this.painter.stroke("#50fa7b");
-      this.painter.setStrokeWeight(colWidth + 1);
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

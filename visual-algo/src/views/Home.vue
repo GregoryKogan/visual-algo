@@ -5,6 +5,7 @@
     <v-row justify="space-around">
       <button v-on:click="$router.push('BubbleSort')">BubbleSort</button>
       <button v-on:click="$router.push('SelectionSort')">SelectionSort</button>
+      <button v-on:click="$router.push('InsertionSort')">InsertionSort</button>
     </v-row>
   </div>
 </template>
