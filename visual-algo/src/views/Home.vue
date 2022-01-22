@@ -6,6 +6,9 @@
       <button v-on:click="$router.push('BubbleSort')">BubbleSort</button>
       <button v-on:click="$router.push('SelectionSort')">SelectionSort</button>
       <button v-on:click="$router.push('InsertionSort')">InsertionSort</button>
+      <button v-on:click="$router.push('BinaryInsertionSort')">
+        BinaryInsertionSort
+      </button>
     </v-row>
   </div>
 </template>

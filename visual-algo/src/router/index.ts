@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import BubbleSort from "../views/BubbleSort.vue";
 import SelectionSort from "../views/SelectionSort.vue";
 import InsertionSort from "../views/InsertionSort.vue";
+import BinaryInsertionSort from "../views/BinaryInsertionSort.vue";
 import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
@@ -27,6 +28,11 @@ const routes: Array<RouteConfig> = [
     path: "/InsertionSort",
     name: "InsertionSort",
     component: InsertionSort,
+  },
+  {
+    path: "/BinaryInsertionSort",
+    name: "BinaryInsertionSort",
+    component: BinaryInsertionSort,
   },
 ];
 
