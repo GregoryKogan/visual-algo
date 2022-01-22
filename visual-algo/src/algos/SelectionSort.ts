@@ -1,7 +1,7 @@
 import { Painter } from "@/utilities/painter";
 import { shuffle } from "@/utilities/shuffle";
 
-export class BubbleSortSketch {
+export class SelectionSortSketch {
   painter: Painter;
   width: number;
   height: number;
@@ -16,6 +16,7 @@ export class BubbleSortSketch {
   n: number;
   i: number;
   j: number;
+  minInd: number;
   compsCounter: number;
   stepsPerFrame: number;
   finished: boolean;
@@ -36,6 +37,7 @@ export class BubbleSortSketch {
     this.n = 100;
     this.i = 0;
     this.j = 0;
+    this.minInd = 0;
     this.compsCounter = 0;
     this.stepsPerFrame = 5;
     this.finished = false;
@@ -49,7 +51,8 @@ export class BubbleSortSketch {
 
     this.finished = false;
     this.i = 0;
-    this.j = 0;
+    this.j = 1;
+    this.minInd = 0;
     this.compsCounter = 0;
     this.values = [];
     for (let i = 1; i <= this.n; ++i) this.values.push(i);
@@ -61,7 +64,7 @@ export class BubbleSortSketch {
   draw(): void {
     this.painter.background("#282a36");
 
-    for (let i = 0; i < this.stepsPerFrame; ++i) this.bubbleSortStep();
+    for (let i = 0; i < this.stepsPerFrame; ++i) this.selectionSortStep();
 
     this.renderValues();
 
@@ -101,8 +104,10 @@ export class BubbleSortSketch {
     for (let i = 0; i < this.n; ++i) {
       this.painter.fill("#f8f8f2");
       if (i == this.i) this.painter.fill("#8be9fd");
-      if (i == this.n - this.j) this.painter.fill("#ffb86c");
+      if (i == this.j) this.painter.fill("#ffb86c");
+      if (i == this.minInd) this.painter.fill("#ff5555");
       if (this.finished) this.painter.fill("#50fa7b");
+
       const curHeight = ratio * this.values[i];
       this.painter.rect(
         i * colWidth,
@@ -113,23 +118,24 @@ export class BubbleSortSketch {
     }
   }
 
-  bubbleSortStep(): void {
-    if (this.j >= this.n - 1) {
+  selectionSortStep(): void {
+    if (this.i >= this.n - 1) {
       this.finished = true;
       return;
     }
 
-    this.i++;
-    if (this.i < this.n - this.j) {
-      this.compsCounter++;
-      if (this.values[this.i - 1] > this.values[this.i]) {
-        const tmp = this.values[this.i - 1];
-        this.values[this.i - 1] = this.values[this.i];
-        this.values[this.i] = tmp;
-      }
-    } else {
-      this.i = 0;
+    if (this.j < this.n) {
       this.j++;
+      this.compsCounter++;
+      if (this.values[this.j] < this.values[this.minInd]) this.minInd = this.j;
+    } else {
+      const tmp = this.values[this.i];
+      this.values[this.i] = this.values[this.minInd];
+      this.values[this.minInd] = tmp;
+
+      this.i++;
+      this.minInd = this.i;
+      this.j = this.i;
     }
   }
 }
