@@ -46,7 +46,7 @@
           type="range"
           min="100"
           max="1000000"
-          step="1"
+          step="100"
         />
       </v-col>
     </div>

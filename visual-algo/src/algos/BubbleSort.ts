@@ -90,7 +90,7 @@ export class BubbleSortSketch {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
       if (i == this.n - this.i) this.painter.stroke("#8be9fd");
-      if (i == this.j + 1) this.painter.stroke("#ffb86c");
+      else if (i == this.j + 1) this.painter.stroke("#ffb86c");
       if ((i == this.n - this.i || i == this.j + 1) && !this.finished)
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
       if (this.finished) this.painter.stroke("#50fa7b");

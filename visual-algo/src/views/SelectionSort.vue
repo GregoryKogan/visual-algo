@@ -13,15 +13,14 @@
           >N: {{ this.sketch.values.length }}</span
         >
         <v-spacer></v-spacer>
-        <span>Steps per frame: {{ this.sketch.stepsPerFrame }}</span>
+        <span>Steps per second: {{ this.stepsPerSecond }}</span>
       </v-col>
     </div>
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
-    <span>FPS: {{ this.sketch.fps }}</span>
     <div class="controls">
       <v-col>
         <button
-          v-on:click="sketch.setup({ n: n, stepsPerFrame: stepsPerFrame })"
+          v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })"
         >
           START
         </button>
@@ -38,16 +37,16 @@
         />
         <div style="height: 20px"></div>
         <span style="font-size: large"
-          >Steps per frame: {{ this.stepsPerFrame }}</span
+          >Steps per second: {{ this.stepsPerSecond }}</span
         >
         <v-spacer></v-spacer>
         <input
           style="width: min(100%, 800px)"
-          v-model="stepsPerFrame"
+          v-model="stepsPerSecond"
           type="range"
-          min="1"
-          max="5000"
-          step="1"
+          min="100"
+          max="1000000"
+          step="100"
         />
       </v-col>
     </div>
@@ -66,7 +65,7 @@ export default Vue.extend({
     canvasHeight: 1125,
     sketch: {} as SelectionSortSketch,
     n: 100,
-    stepsPerFrame: 5,
+    stepsPerSecond: 100,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
