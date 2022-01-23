@@ -85,10 +85,7 @@ export class InsertionSortSketch {
     this.painter.background("#282a36");
     const colWidth: number = this.width / this.n;
     const maxHeight: number = this.height;
-    let maxValue = this.values[0];
-    for (let i = 1; i < this.n; ++i)
-      if (this.values[i] > maxValue) maxValue = this.values[i];
-    const ratio = maxHeight / maxValue;
+    const ratio = maxHeight / this.n;
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
