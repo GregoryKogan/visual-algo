@@ -1,10 +1,10 @@
 <template>
   <div class="sort-page">
     <h1 style="margin-top: 20px">
-      <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble Sort</a>
+      <a href="https://en.wikipedia.org/wiki/Merge_sort">Merge Sort</a>
     </h1>
-    <h3>Time complexity O(n²)</h3>
-    <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
+    <h3>Time complexity O(n log n)</h3>
+    <h3 style="margin-bottom: 20px">Space complexity O(n)</h3>
     <div class="stats">
       <v-col>
         <span>{{ this.sketch.compsCounter }} comparisons</span>
@@ -45,7 +45,7 @@
           v-model="stepsPerSecond"
           type="range"
           min="100"
-          max="1000000"
+          max="30000"
           step="100"
         />
       </v-col>
@@ -55,22 +55,22 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { BubbleSortSketch } from "../algos/BubbleSort";
+import { MergeSortSketch } from "../algos/MergeSort";
 import { Painter } from "../utilities/painter";
 
 export default Vue.extend({
-  name: "BubbleSort",
+  name: "MergeSort",
   data: () => ({
     canvasWidth: 2000,
     canvasHeight: 1125,
-    sketch: {} as BubbleSortSketch,
+    sketch: {} as MergeSortSketch,
     n: 100,
     stepsPerSecond: 100,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
     if (canvas && Painter.isCanvas(canvas)) {
-      this.sketch = new BubbleSortSketch(canvas);
+      this.sketch = new MergeSortSketch(canvas);
       this.sketch.setup();
     }
   },

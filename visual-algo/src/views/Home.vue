@@ -10,6 +10,7 @@
         BinaryInsertionSort
       </button>
       <button v-on:click="$router.push('PancakeSort')">PancakeSort</button>
+      <button v-on:click="$router.push('MergeSort')">MergeSort</button>
     </v-row>
   </div>
 </template>
