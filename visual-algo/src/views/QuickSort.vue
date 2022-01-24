@@ -3,7 +3,9 @@
     <h1 style="margin-top: 20px">
       <a href="https://en.wikipedia.org/wiki/Quicksort">Quick Sort</a>
     </h1>
-    <h3>Time complexity O(n²) - worst case, O(n log n) - average</h3>
+    <h3>Time complexity</h3>
+    <h3>O(n²) - worst case</h3>
+    <h3>O(n log n) - average</h3>
     <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
     <div class="stats">
       <v-col>
