@@ -11,6 +11,7 @@
       </button>
       <button v-on:click="$router.push('PancakeSort')">PancakeSort</button>
       <button v-on:click="$router.push('MergeSort')">MergeSort</button>
+      <button v-on:click="$router.push('HeapSort')">HeapSort</button>
     </v-row>
   </div>
 </template>

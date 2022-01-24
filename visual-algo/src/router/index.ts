@@ -7,6 +7,7 @@ import InsertionSort from "../views/InsertionSort.vue";
 import BinaryInsertionSort from "../views/BinaryInsertionSort.vue";
 import PancakeSort from "../views/PancakeSort.vue";
 import MergeSort from "../views/MergeSort.vue";
+import HeapSort from "../views/HeapSort.vue";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ const routes: Array<RouteConfig> = [
     path: "/MergeSort",
     name: "MergeSort",
     component: MergeSort,
+  },
+  {
+    path: "/HeapSort",
+    name: "HeapSort",
+    component: HeapSort,
   },
 ];
 
