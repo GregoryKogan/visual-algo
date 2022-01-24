@@ -9,6 +9,7 @@
       <button v-on:click="$router.push('BinaryInsertionSort')">
         BinaryInsertionSort
       </button>
+      <button v-on:click="$router.push('ShellSort')">ShellSort</button>
       <button v-on:click="$router.push('PancakeSort')">PancakeSort</button>
       <button v-on:click="$router.push('MergeSort')">MergeSort</button>
       <button v-on:click="$router.push('HeapSort')">HeapSort</button>
