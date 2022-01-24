@@ -11,6 +11,7 @@ import HeapSort from "../views/HeapSort.vue";
 import ShellSort from "../views/ShellSort.vue";
 import QuickSort from "../views/QuickSort.vue";
 import RadixSort from "../views/RadixSort.vue";
+import CountingSort from "../views/CountingSort.vue";
 
 Vue.use(VueRouter);
 
@@ -69,6 +70,11 @@ const routes: Array<RouteConfig> = [
     path: "/RadixSort",
     name: "RadixSort",
     component: RadixSort,
+  },
+  {
+    path: "/CountingSort",
+    name: "CountingSort",
+    component: CountingSort,
   },
 ];
 
