@@ -9,6 +9,7 @@ import PancakeSort from "../views/PancakeSort.vue";
 import MergeSort from "../views/MergeSort.vue";
 import HeapSort from "../views/HeapSort.vue";
 import ShellSort from "../views/ShellSort.vue";
+import QuickSort from "../views/QuickSort.vue";
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,11 @@ const routes: Array<RouteConfig> = [
     path: "/ShellSort",
     name: "ShellSort",
     component: ShellSort,
+  },
+  {
+    path: "/QuickSort",
+    name: "QuickSort",
+    component: QuickSort,
   },
 ];
 

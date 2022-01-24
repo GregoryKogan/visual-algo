@@ -1,7 +1,7 @@
 <template>
   <div class="sort-page">
     <h1 style="margin-top: 20px">
-      <a href="https://en.wikipedia.org/wiki/Shellsort">Shell Sort</a>
+      <a href="https://en.wikipedia.org/wiki/Quicksort">Quick Sort</a>
     </h1>
     <h3>Time complexity O(n²) - worst case, O(n log n) - average</h3>
     <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
@@ -45,7 +45,7 @@
           v-model="stepsPerSecond"
           type="range"
           min="100"
-          max="30000"
+          max="10000"
           step="100"
         />
       </v-col>
@@ -55,22 +55,22 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { ShellSortSketch } from "../algos/ShellSort";
+import { QuickSortSketch } from "../algos/QuickSort";
 import { Painter } from "../utilities/painter";
 
 export default Vue.extend({
-  name: "ShellSort",
+  name: "QuickSort",
   data: () => ({
     canvasWidth: 2000,
     canvasHeight: 1125,
-    sketch: {} as ShellSortSketch,
+    sketch: {} as QuickSortSketch,
     n: 100,
     stepsPerSecond: 100,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
     if (canvas && Painter.isCanvas(canvas)) {
-      this.sketch = new ShellSortSketch(canvas);
+      this.sketch = new QuickSortSketch(canvas);
       this.sketch.setup();
     }
   },
