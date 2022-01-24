@@ -10,6 +10,7 @@ import MergeSort from "../views/MergeSort.vue";
 import HeapSort from "../views/HeapSort.vue";
 import ShellSort from "../views/ShellSort.vue";
 import QuickSort from "../views/QuickSort.vue";
+import RadixSort from "../views/RadixSort.vue";
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,11 @@ const routes: Array<RouteConfig> = [
     path: "/QuickSort",
     name: "QuickSort",
     component: QuickSort,
+  },
+  {
+    path: "/RadixSort",
+    name: "RadixSort",
+    component: RadixSort,
   },
 ];
 
