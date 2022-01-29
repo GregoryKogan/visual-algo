@@ -12,6 +12,7 @@ import ShellSort from "../views/ShellSort.vue";
 import QuickSort from "../views/QuickSort.vue";
 import RadixSort from "../views/RadixSort.vue";
 import CountingSort from "../views/CountingSort.vue";
+import DFS from "../views/DFS.vue";
 
 Vue.use(VueRouter);
 
@@ -75,6 +76,11 @@ const routes: Array<RouteConfig> = [
     path: "/CountingSort",
     name: "CountingSort",
     component: CountingSort,
+  },
+  {
+    path: "/DFS",
+    name: "DFS",
+    component: DFS,
   },
 ];
 
