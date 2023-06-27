@@ -60,7 +60,9 @@ export class QuickSortSketch {
     high: number,
     main = false
   ): Promise<void> {
-    if (pid != this.curPid) return;
+    if (pid != this.curPid) {
+      return;
+    }
 
     this.low = low;
     this.high = high;
@@ -88,13 +90,17 @@ export class QuickSortSketch {
   }
 
   async partition(pid: number, low: number, high: number): Promise<number> {
-    if (pid != this.curPid) return -1;
+    if (pid != this.curPid) {
+      return -1;
+    }
 
     const pivot = this.values[high]; // pivot
     let i = low - 1; // Index of smaller element and indicates the right position of pivot found so far
 
     for (let j = low; j <= high - 1; j++) {
-      if (pid != this.curPid) return -1;
+      if (pid != this.curPid) {
+        return -1;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer10ms == 0) {
@@ -124,11 +130,17 @@ export class QuickSortSketch {
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.low) this.painter.stroke("#ff79c6");
-      else if (i == this.high) this.painter.stroke("#ff79c6");
-      if ((i == this.low || i == this.high) && !this.finished)
+      if (i == this.low) {
+        this.painter.stroke("#ff79c6");
+      } else if (i == this.high) {
+        this.painter.stroke("#ff79c6");
+      }
+      if ((i == this.low || i == this.high) && !this.finished) {
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
-      if (this.finished) this.painter.stroke("#50fa7b");
+      }
+      if (this.finished) {
+        this.painter.stroke("#50fa7b");
+      }
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

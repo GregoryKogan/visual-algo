@@ -13,7 +13,9 @@ export class Painter {
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    if (this.ctx) this.ctx.imageSmoothingEnabled = false;
+    if (this.ctx) {
+      this.ctx.imageSmoothingEnabled = false;
+    }
     this.width = canvas.width;
     this.height = canvas.height;
     this.doFill = false;
@@ -31,7 +33,9 @@ export class Painter {
   }
 
   background(color: string): void {
-    if (!this.ctx) return;
+    if (!this.ctx) {
+      return;
+    }
     this.ctx.fillStyle = color;
     this.ctx.fillRect(0, 0, this.width, this.height);
   }
@@ -63,7 +67,9 @@ export class Painter {
   }
 
   circle(x: number, y: number, radius: number): void {
-    if (!this.ctx) return;
+    if (!this.ctx) {
+      return;
+    }
     this.ctx.beginPath();
     this.ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
     if (this.doFill) {
@@ -78,7 +84,9 @@ export class Painter {
   }
 
   rect(x: number, y: number, width: number, height: number): void {
-    if (!this.ctx) return;
+    if (!this.ctx) {
+      return;
+    }
     this.ctx.beginPath();
     this.ctx.rect(x, y, width, height);
     if (this.doFill) {
@@ -93,7 +101,9 @@ export class Painter {
   }
 
   line(x1: number, y1: number, x2: number, y2: number): void {
-    if (!this.ctx) return;
+    if (!this.ctx) {
+      return;
+    }
     this.ctx.lineWidth = this.strokeWeight;
     this.ctx.strokeStyle = this.strokeStyle;
     this.ctx.beginPath();

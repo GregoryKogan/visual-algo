@@ -52,16 +52,22 @@ export class CountingSortSketch {
   }
 
   async countingSort(pid: number): Promise<void> {
-    if (pid != this.curPid) return;
+    if (pid != this.curPid) {
+      return;
+    }
 
     const counter = new Array<number>(this.n + 1);
     for (let i = 0; i < this.n + 1; ++i) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       counter[i] = 0;
     }
 
     for (let i = 0; i < this.n; ++i) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer10ms == 0) {
@@ -74,7 +80,9 @@ export class CountingSortSketch {
     let k = 0;
     for (let i = 1; i <= this.n; ++i) {
       for (let j = 0; j < counter[i]; ++j) {
-        if (pid != this.curPid) return;
+        if (pid != this.curPid) {
+          return;
+        }
         this.compsCounter++;
         this.stepsCounter++;
         if (this.stepsCounter % this.stepsPer10ms == 0) {
@@ -100,10 +108,15 @@ export class CountingSortSketch {
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.i) this.painter.stroke("#ff79c6");
-      if (i == this.i && !this.finished)
+      if (i == this.i) {
+        this.painter.stroke("#ff79c6");
+      }
+      if (i == this.i && !this.finished) {
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
-      if (this.finished) this.painter.stroke("#50fa7b");
+      }
+      if (this.finished) {
+        this.painter.stroke("#50fa7b");
+      }
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

@@ -14,7 +14,7 @@ export function segSegIntersection(
   const u =
     ((x1 - x3) * (y1 - y2) - (y1 - y3) * (x1 - x2)) /
     ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4));
-  return 0 <= t && t <= 1 && 0 <= u && u <= 1;
+  return t >= 0 && t <= 1 && u >= 0 && u <= 1;
 }
 
 export function genRandGraphPositions(

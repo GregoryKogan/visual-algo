@@ -61,11 +61,15 @@ export class HeapSortSketch {
   }
 
   async heapSort(pid: number): Promise<void> {
-    if (pid != this.curPid) return;
+    if (pid != this.curPid) {
+      return;
+    }
 
     // Build heap (rearrange array)
     for (let i = Math.floor(this.n / 2) - 1; i >= 0; --i) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer100ms == 0) {
@@ -81,7 +85,9 @@ export class HeapSortSketch {
 
     // One by one extract an element from heap
     for (let i = this.n - 1; i > 0; --i) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer100ms == 0) {
@@ -106,7 +112,9 @@ export class HeapSortSketch {
   }
 
   async heapify(pid: number, n: number, i: number): Promise<void> {
-    if (pid != this.curPid) return;
+    if (pid != this.curPid) {
+      return;
+    }
     this.hn = n;
     this.hi = i;
 
@@ -125,10 +133,14 @@ export class HeapSortSketch {
     const r = 2 * i + 2; // right = 2*i + 2
 
     // If left child is larger than root
-    if (l < n && this.values[l] > this.values[largest]) largest = l;
+    if (l < n && this.values[l] > this.values[largest]) {
+      largest = l;
+    }
 
     // If right child is larger than largest so far
-    if (r < n && this.values[r] > this.values[largest]) largest = r;
+    if (r < n && this.values[r] > this.values[largest]) {
+      largest = r;
+    }
 
     // If largest is not root
     if (largest != i) {
@@ -149,11 +161,17 @@ export class HeapSortSketch {
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.hi) this.painter.stroke("#8be9fd");
-      else if (i == this.hn) this.painter.stroke("#ffb86c");
-      if ((i == this.hi || i == this.hn) && !this.finished)
+      if (i == this.hi) {
+        this.painter.stroke("#8be9fd");
+      } else if (i == this.hn) {
+        this.painter.stroke("#ffb86c");
+      }
+      if ((i == this.hi || i == this.hn) && !this.finished) {
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
-      if (this.finished) this.painter.stroke("#50fa7b");
+      }
+      if (this.finished) {
+        this.painter.stroke("#50fa7b");
+      }
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

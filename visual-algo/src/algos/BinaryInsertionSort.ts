@@ -72,7 +72,9 @@ export class BinaryInsertionSortSketch {
       let low = 0;
       let high = j;
       while (low <= high) {
-        if (pid != this.curPid) return;
+        if (pid != this.curPid) {
+          return;
+        }
 
         this.compsCounter += 2;
 
@@ -91,13 +93,20 @@ export class BinaryInsertionSortSketch {
         if (selected == this.values[mid]) {
           location = mid + 1;
           break;
-        } else if (selected > this.values[mid]) low = mid + 1;
-        else high = mid - 1;
+        } else if (selected > this.values[mid]) {
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
       }
-      if (location == -1) location = low;
+      if (location == -1) {
+        location = low;
+      }
 
       while (j >= location) {
-        if (pid != this.curPid) return;
+        if (pid != this.curPid) {
+          return;
+        }
 
         this.compsCounter++;
         this.values[j + 1] = this.values[j];
@@ -126,26 +135,36 @@ export class BinaryInsertionSortSketch {
     const maxHeight: number = this.height;
     let maxValue = this.values[0];
     for (let i = 1; i < this.n; ++i)
-      if (this.values[i] > maxValue) maxValue = this.values[i];
+      if (this.values[i] > maxValue) {
+        maxValue = this.values[i];
+      }
     const ratio = maxHeight / maxValue;
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.i) this.painter.stroke("#8be9fd");
-      else if (i == this.j) this.painter.stroke("#ffb86c");
-      else if (i == this.low) this.painter.stroke("#ff79c6");
-      else if (i == this.high) this.painter.stroke("#ff79c6");
-      if (i == this.loc) this.painter.stroke("#ff5555");
-      if (
-        (i == this.i ||
-          i == this.j ||
-          i == this.low ||
-          i == this.high ||
-          i == this.loc) &&
-        !this.finished
-      )
+      if (i == this.i) {
+        this.painter.stroke("#8be9fd");
+      } else if (i == this.j) {
+        this.painter.stroke("#ffb86c");
+      } else if (i == this.low) {
+        this.painter.stroke("#ff79c6");
+      } else if (i == this.high) {
+        this.painter.stroke("#ff79c6");
+      }
+      if (i == this.loc) {
+        this.painter.stroke("#ff5555");
+      }
+      if ((i == this.i ||
+        i == this.j ||
+        i == this.low ||
+        i == this.high ||
+        i == this.loc) &&
+        !this.finished) {
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
-      if (this.finished) this.painter.stroke("#50fa7b");
+      }
+      if (this.finished) {
+        this.painter.stroke("#50fa7b");
+      }
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

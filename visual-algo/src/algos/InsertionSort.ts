@@ -59,7 +59,9 @@ export class InsertionSortSketch {
       const key = this.values[i];
       let j = i - 1;
       while (j >= 0 && this.values[j] > key) {
-        if (pid != this.curPid) return;
+        if (pid != this.curPid) {
+          return;
+        }
 
         this.compsCounter++;
 
@@ -74,7 +76,9 @@ export class InsertionSortSketch {
           await sleep(10);
         }
       }
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.values[j + 1] = key;
     }
     this.finished = true;
@@ -89,11 +93,17 @@ export class InsertionSortSketch {
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.i) this.painter.stroke("#8be9fd");
-      else if (i == this.j) this.painter.stroke("#ffb86c");
-      if ((i == this.i || i == this.j) && !this.finished)
+      if (i == this.i) {
+        this.painter.stroke("#8be9fd");
+      } else if (i == this.j) {
+        this.painter.stroke("#ffb86c");
+      }
+      if ((i == this.i || i == this.j) && !this.finished) {
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
-      if (this.finished) this.painter.stroke("#50fa7b");
+      }
+      if (this.finished) {
+        this.painter.stroke("#50fa7b");
+      }
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

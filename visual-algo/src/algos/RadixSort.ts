@@ -52,7 +52,9 @@ export class RadixSortSketch {
   }
 
   async radixSort(pid: number): Promise<void> {
-    if (pid != this.curPid) return;
+    if (pid != this.curPid) {
+      return;
+    }
 
     // Find the maximum number to know number of digits
     const m = await this.getMax(pid);
@@ -61,7 +63,9 @@ export class RadixSortSketch {
     // instead of passing digit number, exp is passed.
     // exp is 10^i where i is current digit number
     for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer10ms == 0) {
@@ -78,24 +82,32 @@ export class RadixSortSketch {
   }
 
   async getMax(pid: number): Promise<number> {
-    if (pid != this.curPid) return 0;
+    if (pid != this.curPid) {
+      return 0;
+    }
 
     let mx = this.values[0];
     for (let i = 1; i < this.n; i++) {
-      if (pid != this.curPid) return 0;
+      if (pid != this.curPid) {
+        return 0;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer10ms == 0) {
         this.renderValues();
         await sleep(10);
       }
-      if (this.values[i] > mx) mx = this.values[i];
+      if (this.values[i] > mx) {
+        mx = this.values[i];
+      }
     }
     return mx;
   }
 
   async countSort(pid: number, exp: number): Promise<void> {
-    if (pid != this.curPid) return;
+    if (pid != this.curPid) {
+      return;
+    }
 
     const output = new Array(this.n); // output array
     let i;
@@ -112,7 +124,9 @@ export class RadixSortSketch {
 
     // Store count of occurrences in count[]
     for (i = 0; i < this.n; i++) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.i = i;
       this.compsCounter++;
       this.stepsCounter++;
@@ -126,7 +140,9 @@ export class RadixSortSketch {
     // Change count[i] so that count[i] now contains
     // actual position of this digit in output[]
     for (i = 1; i < 10; i++) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer10ms == 0) {
@@ -138,7 +154,9 @@ export class RadixSortSketch {
 
     // Build the output array
     for (i = this.n - 1; i >= 0; i--) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer10ms == 0) {
@@ -152,7 +170,9 @@ export class RadixSortSketch {
     // Copy the output array to arr[], so that arr[] now
     // contains sorted numbers according to current digit
     for (i = 0; i < this.n; i++) {
-      if (pid != this.curPid) return;
+      if (pid != this.curPid) {
+        return;
+      }
       this.compsCounter++;
       this.stepsCounter++;
       if (this.stepsCounter % this.stepsPer10ms == 0) {
@@ -171,10 +191,15 @@ export class RadixSortSketch {
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.i) this.painter.stroke("#ff79c6");
-      if (i == this.i && !this.finished)
+      if (i == this.i) {
+        this.painter.stroke("#ff79c6");
+      }
+      if (i == this.i && !this.finished) {
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
-      if (this.finished) this.painter.stroke("#50fa7b");
+      }
+      if (this.finished) {
+        this.painter.stroke("#50fa7b");
+      }
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,

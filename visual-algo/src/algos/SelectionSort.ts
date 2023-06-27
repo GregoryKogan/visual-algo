@@ -61,10 +61,14 @@ export class SelectionSortSketch {
     for (let i = 0; i < this.n - 1; ++i) {
       let minInd = i;
       for (let j = i + 1; j < this.n; ++j) {
-        if (pid != this.curPid) return;
+        if (pid != this.curPid) {
+          return;
+        }
 
         this.compsCounter++;
-        if (this.values[j] < this.values[minInd]) minInd = j;
+        if (this.values[j] < this.values[minInd]) {
+          minInd = j;
+        }
 
         this.i = i;
         this.j = j;
@@ -89,17 +93,26 @@ export class SelectionSortSketch {
     const maxHeight: number = this.height;
     let maxValue = this.values[0];
     for (let i = 1; i < this.n; ++i)
-      if (this.values[i] > maxValue) maxValue = this.values[i];
+      if (this.values[i] > maxValue) {
+        maxValue = this.values[i];
+      }
     const ratio = maxHeight / maxValue;
     for (let i = 0; i < this.n; ++i) {
       this.painter.setStrokeWeight(colWidth + 1);
       this.painter.stroke("#f8f8f2");
-      if (i == this.i) this.painter.stroke("#8be9fd");
-      else if (i == this.j) this.painter.stroke("#ffb86c");
-      else if (i == this.minInd) this.painter.stroke("#ff5555");
-      if ((i == this.i || i == this.j || i == this.minInd) && !this.finished)
+      if (i == this.i) {
+        this.painter.stroke("#8be9fd");
+      } else if (i == this.j) {
+        this.painter.stroke("#ffb86c");
+      } else if (i == this.minInd) {
+        this.painter.stroke("#ff5555");
+      }
+      if ((i == this.i || i == this.j || i == this.minInd) && !this.finished) {
         this.painter.setStrokeWeight(Math.max(colWidth + 1, 7));
-      if (this.finished) this.painter.stroke("#50fa7b");
+      }
+      if (this.finished) {
+        this.painter.stroke("#50fa7b");
+      }
       const curHeight = ratio * this.values[i];
       this.painter.line(
         i * colWidth + colWidth / 2,
