@@ -19,14 +19,14 @@
         <v-spacer></v-spacer>
         <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
-        <input
-          style="width: min(100%, 800px)"
+        <v-slider
           v-model="n"
-          type="range"
           min="10"
           max="500"
           step="1"
-        />
+          color="#50fa7b"
+          thumb-color="#f8f8f2"
+        ></v-slider>
       </v-col>
     </div>
   </div>

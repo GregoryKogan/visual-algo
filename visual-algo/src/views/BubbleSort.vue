@@ -25,27 +25,26 @@
         <v-spacer></v-spacer>
         <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
-        <input
-          style="width: min(100%, 800px)"
+        <v-slider
           v-model="n"
-          type="range"
           min="10"
           max="2000"
           step="10"
-        />
-        <div style="height: 20px"></div>
+          color="#50fa7b"
+          thumb-color="#f8f8f2"
+        ></v-slider>
         <span style="font-size: large"
           >Steps per second: {{ stepsPerSecond }}</span
         >
         <v-spacer></v-spacer>
-        <input
-          style="width: min(100%, 800px)"
+        <v-slider
           v-model="stepsPerSecond"
-          type="range"
           min="100"
           max="1000000"
           step="100"
-        />
+          color="#50fa7b"
+          thumb-color="#f8f8f2"
+        ></v-slider>
       </v-col>
     </div>
   </div>
