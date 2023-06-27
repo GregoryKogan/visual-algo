@@ -1,92 +1,76 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/Home.vue";
-import BubbleSort from "../views/BubbleSort.vue";
-import SelectionSort from "../views/SelectionSort.vue";
-import InsertionSort from "../views/InsertionSort.vue";
-import BinaryInsertionSort from "../views/BinaryInsertionSort.vue";
-import PancakeSort from "../views/PancakeSort.vue";
-import MergeSort from "../views/MergeSort.vue";
-import HeapSort from "../views/HeapSort.vue";
-import ShellSort from "../views/ShellSort.vue";
-import QuickSort from "../views/QuickSort.vue";
-import RadixSort from "../views/RadixSort.vue";
-import CountingSort from "../views/CountingSort.vue";
-import DFS from "../views/DFS.vue";
+// Composables
+import { createRouter, createWebHistory } from 'vue-router';
 
-Vue.use(VueRouter);
-
-const routes: Array<RouteConfig> = [
+const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("@/views/Home.vue"),
   },
   {
     path: "/BubbleSort",
     name: "BubbleSort",
-    component: BubbleSort,
+    component: () => import("@/views/BubbleSort.vue"),
   },
   {
     path: "/SelectionSort",
     name: "SelectionSort",
-    component: SelectionSort,
+    component: () => import("@/views/SelectionSort.vue"),
   },
   {
     path: "/InsertionSort",
     name: "InsertionSort",
-    component: InsertionSort,
+    component: () => import("@/views/InsertionSort.vue"),
   },
   {
     path: "/BinaryInsertionSort",
     name: "BinaryInsertionSort",
-    component: BinaryInsertionSort,
+    component: () => import("@/views/BinaryInsertionSort.vue"),
   },
   {
     path: "/PancakeSort",
     name: "PancakeSort",
-    component: PancakeSort,
+    component: () => import("@/views/PancakeSort.vue"),
   },
   {
     path: "/MergeSort",
     name: "MergeSort",
-    component: MergeSort,
+    component: () => import("@/views/MergeSort.vue"),
   },
   {
     path: "/HeapSort",
     name: "HeapSort",
-    component: HeapSort,
+    component: () => import("@/views/HeapSort.vue"),
   },
   {
     path: "/ShellSort",
     name: "ShellSort",
-    component: ShellSort,
+    component: () => import("@/views/ShellSort.vue"),
   },
   {
     path: "/QuickSort",
     name: "QuickSort",
-    component: QuickSort,
+    component: () => import("@/views/QuickSort.vue"),
   },
   {
     path: "/RadixSort",
     name: "RadixSort",
-    component: RadixSort,
+    component: () => import("@/views/RadixSort.vue"),
   },
   {
     path: "/CountingSort",
     name: "CountingSort",
-    component: CountingSort,
+    component: () => import("@/views/CountingSort.vue"),
   },
   {
     path: "/DFS",
     name: "DFS",
-    component: DFS,
+    component: () => import("@/views/DFS.vue"),
   },
 ];
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 

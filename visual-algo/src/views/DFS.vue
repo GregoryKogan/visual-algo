@@ -9,7 +9,7 @@
     <h3 style="margin-bottom: 20px">Space complexity O(|V|)</h3>
     <div class="stats">
       <v-col>
-        <span>{{ this.sketch.visitedCounter }} visited</span>
+        <span>{{ sketch.visitedCounter }} visited</span>
       </v-col>
     </div>
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
@@ -17,7 +17,7 @@
       <v-col>
         <button v-on:click="sketch.setup({ n: n })">START</button>
         <v-spacer></v-spacer>
-        <span style="font-size: large">N: {{ this.n }}</span>
+        <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
         <input
           style="width: min(100%, 800px)"
@@ -33,11 +33,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import { DFSSketch } from "../algos/DFS";
 import { Painter } from "../utilities/painter";
 
-export default Vue.extend({
+export default defineComponent({
   name: "DFS",
   data: () => ({
     canvasWidth: 2000,

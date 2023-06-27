@@ -10,13 +10,11 @@
     </h3>
     <div class="stats">
       <v-col>
-        <span>{{ this.sketch.compsCounter }} comparisons</span>
+        <span>{{ sketch.compsCounter }} comparisons</span>
         <v-spacer></v-spacer>
-        <span v-if="this.sketch.values"
-          >N: {{ this.sketch.values.length }}</span
-        >
+        <span v-if="sketch.values">N: {{ sketch.values.length }}</span>
         <v-spacer></v-spacer>
-        <span>Steps per second: {{ this.stepsPerSecond }}</span>
+        <span>Steps per second: {{ stepsPerSecond }}</span>
       </v-col>
     </div>
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
@@ -28,7 +26,7 @@
           START
         </button>
         <v-spacer></v-spacer>
-        <span style="font-size: large">N: {{ this.n }}</span>
+        <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
         <input
           style="width: min(100%, 800px)"
@@ -40,7 +38,7 @@
         />
         <div style="height: 20px"></div>
         <span style="font-size: large"
-          >Steps per second: {{ this.stepsPerSecond }}</span
+          >Steps per second: {{ stepsPerSecond }}</span
         >
         <v-spacer></v-spacer>
         <input
@@ -57,11 +55,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import { CountingSortSketch } from "../algos/CountingSort";
 import { Painter } from "../utilities/painter";
 
-export default Vue.extend({
+export default defineComponent({
   name: "CountingSort",
   data: () => ({
     canvasWidth: 2000,

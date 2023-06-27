@@ -8,19 +8,17 @@
     <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
     <div class="stats">
       <v-col>
-        <span>{{ this.sketch.flipsCounter }} flips</span>
+        <span>{{ sketch.flipsCounter }} flips</span>
         <v-spacer></v-spacer>
-        <span>{{ this.sketch.itersCounter }} iterations</span>
+        <span>{{ sketch.itersCounter }} iterations</span>
         <v-spacer></v-spacer>
-        <span v-if="this.sketch.values"
-          >N: {{ this.sketch.values.length }}</span
-        >
+        <span v-if="sketch.values">N: {{ sketch.values.length }}</span>
         <v-spacer></v-spacer>
-        <span>Steps per frame: {{ this.sketch.stepsPerFrame }}</span>
+        <span>Steps per frame: {{ sketch.stepsPerFrame }}</span>
       </v-col>
     </div>
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
-    <span>FPS: {{ this.sketch.fps }}</span>
+    <span>FPS: {{ sketch.fps }}</span>
     <div class="controls">
       <v-col>
         <button
@@ -29,7 +27,7 @@
           START
         </button>
         <v-spacer></v-spacer>
-        <span style="font-size: large">N: {{ this.n }}</span>
+        <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
         <input
           style="width: min(100%, 800px)"
@@ -41,7 +39,7 @@
         />
         <div style="height: 20px"></div>
         <span style="font-size: large"
-          >Steps per frame: {{ this.stepsPerFrame }}</span
+          >Steps per frame: {{ stepsPerFrame }}</span
         >
         <v-spacer></v-spacer>
         <input
@@ -58,11 +56,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import { PancakeSortSketch } from "../algos/PancakeSort";
 import { Painter } from "../utilities/painter";
 
-export default Vue.extend({
+export default defineComponent({
   name: "PancakeSort",
   data: () => ({
     canvasWidth: 2000,

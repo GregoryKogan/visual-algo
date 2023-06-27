@@ -212,3 +212,6 @@ yarn-error.log
 *.xhtml
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,vue,vuejs,node,web
+
+.DS_Store
+
