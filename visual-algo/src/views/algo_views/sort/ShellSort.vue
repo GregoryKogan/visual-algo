@@ -16,7 +16,7 @@
         <span>Steps per second: {{ stepsPerSecond }}</span>
       </v-col>
     </div>
-    <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
+    <SketchCanvas style="width: 100%" />
     <div class="controls">
       <v-col>
         <button v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })">
@@ -39,12 +39,14 @@
 import { defineComponent } from "vue";
 import { ShellSortSketch } from "@/algos/ShellSort";
 import { Painter } from "@/utilities/painter";
+import SketchCanvas from "@/components/SketchCanvas.vue";
 
 export default defineComponent({
   name: "ShellSort",
+  components: {
+    SketchCanvas,
+  },
   data: () => ({
-    canvasWidth: 1920,
-    canvasHeight: 1080,
     sketch: {} as ShellSortSketch,
     n: 100,
     stepsPerSecond: 100,

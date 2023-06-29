@@ -10,7 +10,7 @@
         <span>{{ sketch.visitedCounter }} visited</span>
       </v-col>
     </div>
-    <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
+    <SketchCanvas style="width: 100%" />
     <div class="controls">
       <v-col>
         <button v-on:click="sketch.setup({ n: n })">START</button>
@@ -27,12 +27,14 @@
 import { defineComponent } from "vue";
 import { DFSSketch } from "@/algos/DFS";
 import { Painter } from "@/utilities/painter";
+import SketchCanvas from "@/components/SketchCanvas.vue";
 
 export default defineComponent({
   name: "DFS",
+  components: {
+    SketchCanvas,
+  },
   data: () => ({
-    canvasWidth: 1920,
-    canvasHeight: 1080,
     sketch: {} as DFSSketch,
     n: 100,
   }),
@@ -65,16 +67,6 @@ export default defineComponent({
 .sort-page h1 a:active {
   color: #8be9fd;
   text-decoration: underline;
-}
-
-#sketch {
-  width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  border-radius: 10px;
-  border: 3px dashed #bd93f9;
 }
 
 .controls button {

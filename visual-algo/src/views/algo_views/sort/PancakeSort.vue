@@ -17,7 +17,7 @@
         <span>Steps per frame: {{ sketch.stepsPerFrame }}</span>
       </v-col>
     </div>
-    <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
+    <SketchCanvas style="width: 100%" />
     <span>FPS: {{ sketch.fps }}</span>
     <div class="controls">
       <v-col>
@@ -40,12 +40,14 @@
 import { defineComponent } from "vue";
 import { PancakeSortSketch } from "@/algos/PancakeSort";
 import { Painter } from "@/utilities/painter";
+import SketchCanvas from "@/components/SketchCanvas.vue";
 
 export default defineComponent({
   name: "PancakeSort",
+  components: {
+    SketchCanvas,
+  },
   data: () => ({
-    canvasWidth: 1920,
-    canvasHeight: 1080,
     sketch: {} as PancakeSortSketch,
     n: 100,
     stepsPerFrame: 5,
