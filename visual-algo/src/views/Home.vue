@@ -1,35 +1,35 @@
 <template>
   <div class="home-page">
     <h1>Visual Algo</h1>
-    <h2>Sorting algorithms</h2>
-    <v-row justify="space-around">
-      <button v-on:click="$router.push('BubbleSort')">BubbleSort</button>
-      <button v-on:click="$router.push('SelectionSort')">SelectionSort</button>
-      <button v-on:click="$router.push('InsertionSort')">InsertionSort</button>
-      <button v-on:click="$router.push('BinaryInsertionSort')">
-        BinaryInsertionSort
-      </button>
-      <button v-on:click="$router.push('ShellSort')">ShellSort</button>
-      <button v-on:click="$router.push('PancakeSort')">PancakeSort</button>
-      <button v-on:click="$router.push('MergeSort')">MergeSort</button>
-      <button v-on:click="$router.push('HeapSort')">HeapSort</button>
-      <button v-on:click="$router.push('QuickSort')">QuickSort</button>
-      <button v-on:click="$router.push('RadixSort')">RadixSort</button>
-      <button v-on:click="$router.push('CountingSort')">CountingSort</button>
-    </v-row>
+    <AlgoGroup name="Sorting algorithms" :algos="[
+      { name: 'Bubble sort', route: 'BubbleSort' },
+      { name: 'Selection sort', route: 'SelectionSort' },
+      { name: 'Insertion sort', route: 'InsertionSort' },
+      { name: 'Binary insertion sort', route: 'BinaryInsertionSort' },
+      { name: 'Shell sort', route: 'ShellSort' },
+      { name: 'Pancake sort', route: 'PancakeSort' },
+      { name: 'Merge sort', route: 'MergeSort' },
+      { name: 'Heap sort', route: 'HeapSort' },
+      { name: 'Quick sort', route: 'QuickSort' },
+      { name: 'Radix sort', route: 'RadixSort' },
+      { name: 'Counting sort', route: 'CountingSort' },
+    ]" />
     <div style="height: 30px"></div>
-    <h2>Graph algorithms</h2>
-    <v-row justify="space-around">
-      <button v-on:click="$router.push('DFS')">DFS</button>
-    </v-row>
+    <AlgoGroup name="Graph algorithms" :algos="[{ name: 'DFS', route: 'DFS' }]" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import GoToAlgoButton from "@/components/GoToAlgoButton.vue";
+import AlgoGroup from "@/components/AlgoGroup.vue";
 
 export default defineComponent({
   name: "Home",
+  components: {
+    GoToAlgoButton,
+    AlgoGroup,
+  },
   data: () => ({}),
 });
 </script>
@@ -50,21 +50,5 @@ export default defineComponent({
 
 .home-page h2 {
   margin-bottom: 20px;
-}
-
-.home-page button {
-  background-color: #bd93f9;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  font-size: 20px;
-  border-radius: 10px;
 }
 </style>
