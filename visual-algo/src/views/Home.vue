@@ -1,21 +1,7 @@
 <template>
   <div class="home-page">
     <h1>Visual Algo</h1>
-    <AlgoGroup name="Sorting algorithms" :algos="[
-      { name: 'Bubble sort', route: 'BubbleSort' },
-      { name: 'Selection sort', route: 'SelectionSort' },
-      { name: 'Insertion sort', route: 'InsertionSort' },
-      { name: 'Binary insertion sort', route: 'BinaryInsertionSort' },
-      { name: 'Shell sort', route: 'ShellSort' },
-      { name: 'Pancake sort', route: 'PancakeSort' },
-      { name: 'Merge sort', route: 'MergeSort' },
-      { name: 'Heap sort', route: 'HeapSort' },
-      { name: 'Quick sort', route: 'QuickSort' },
-      { name: 'Radix sort', route: 'RadixSort' },
-      { name: 'Counting sort', route: 'CountingSort' },
-    ]" />
-    <div style="height: 30px"></div>
-    <AlgoGroup name="Graph algorithms" :algos="[{ name: 'DFS', route: 'DFS' }]" />
+    <AlgoGroup v-for="group in groups" :key="group.name" :name="group.name" :algos="group.algos" />
   </div>
 </template>
 
@@ -30,7 +16,30 @@ export default defineComponent({
     GoToAlgoButton,
     AlgoGroup,
   },
-  data: () => ({}),
+  data: () => ({
+    groups: [
+      {
+        name: "Sorting algorithms",
+        algos: [
+          { name: "Bubble sort", route: "BubbleSort" },
+          { name: "Selection sort", route: "SelectionSort" },
+          { name: "Insertion sort", route: "InsertionSort" },
+          { name: "Binary insertion sort", route: "BinaryInsertionSort" },
+          { name: "Shell sort", route: "ShellSort" },
+          { name: "Pancake sort", route: "PancakeSort" },
+          { name: "Merge sort", route: "MergeSort" },
+          { name: "Heap sort", route: "HeapSort" },
+          { name: "Quick sort", route: "QuickSort" },
+          { name: "Radix sort", route: "RadixSort" },
+          { name: "Counting sort", route: "CountingSort" },
+        ],
+      },
+      {
+        name: "Graph algorithms",
+        algos: [{ name: "DFS", route: "DFS" }],
+      },
+    ],
+  }),
 });
 </script>
 
