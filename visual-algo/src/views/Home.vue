@@ -36,19 +36,13 @@ export default defineComponent({
 
 <style>
 .home-page {
-  display: block;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 90vw;
+  margin: auto;
 }
 
 .home-page h1 {
   text-align: center;
   margin-bottom: 20px;
   margin-top: 10px;
-}
-
-.home-page h2 {
-  margin-bottom: 20px;
 }
 </style>
