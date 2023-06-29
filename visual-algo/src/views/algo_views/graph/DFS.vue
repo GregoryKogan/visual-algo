@@ -1,52 +1,23 @@
 <template>
   <div class="sort-page">
     <h1 style="margin-top: 20px">
-      <a href="https://en.wikipedia.org/wiki/Quicksort">Quick Sort</a>
+      <a href="https://en.wikipedia.org/wiki/Depth-first_search">Depth First Search</a>
     </h1>
-    <h3>Time complexity</h3>
-    <h3>O(n²) - worst case</h3>
-    <h3>O(n log n) - average</h3>
-    <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
+    <h3>Time complexity O(|V| + |E|)</h3>
+    <h3 style="margin-bottom: 20px">Space complexity O(|V|)</h3>
     <div class="stats">
       <v-col>
-        <span>{{ sketch.compsCounter }} comparisons</span>
-        <v-spacer></v-spacer>
-        <span v-if="sketch.values">N: {{ sketch.values.length }}</span>
-        <v-spacer></v-spacer>
-        <span>Steps per second: {{ stepsPerSecond }}</span>
+        <span>{{ sketch.visitedCounter }} visited</span>
       </v-col>
     </div>
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
     <div class="controls">
       <v-col>
-        <button
-          v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })"
-        >
-          START
-        </button>
+        <button v-on:click="sketch.setup({ n: n })">START</button>
         <v-spacer></v-spacer>
         <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
-        <v-slider
-          v-model="n"
-          min="10"
-          max="2000"
-          step="10"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
-        <span style="font-size: large"
-          >Steps per second: {{ stepsPerSecond }}</span
-        >
-        <v-spacer></v-spacer>
-        <v-slider
-          v-model="stepsPerSecond"
-          min="100"
-          max="10000"
-          step="100"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
+        <v-slider v-model="n" min="10" max="500" step="1" color="#50fa7b" thumb-color="#f8f8f2"></v-slider>
       </v-col>
     </div>
   </div>
@@ -54,23 +25,22 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { QuickSortSketch } from "../algos/QuickSort";
-import { Painter } from "../utilities/painter";
+import { DFSSketch } from "@/algos/DFS";
+import { Painter } from "@/utilities/painter";
 
 export default defineComponent({
-  name: "QuickSort",
+  name: "DFS",
   data: () => ({
-    canvasWidth: 2000,
-    canvasHeight: 1125,
-    sketch: {} as QuickSortSketch,
+    canvasWidth: 1920,
+    canvasHeight: 1080,
+    sketch: {} as DFSSketch,
     n: 100,
-    stepsPerSecond: 100,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
     if (canvas && Painter.isCanvas(canvas)) {
-      this.sketch = new QuickSortSketch(canvas);
-      this.sketch.setup();
+      this.sketch = new DFSSketch(canvas);
+      this.sketch.setup({ n: this.n });
     }
   },
 });
@@ -87,9 +57,11 @@ export default defineComponent({
   color: #ff79c6;
   text-decoration: none;
 }
+
 .sort-page h1 a:hover {
   text-decoration: underline;
 }
+
 .sort-page h1 a:active {
   color: #8be9fd;
   text-decoration: underline;

@@ -1,10 +1,11 @@
 <template>
   <div class="sort-page">
     <h1 style="margin-top: 20px">
-      <a href="https://en.wikipedia.org/wiki/Insertion_sort">Insertion Sort</a>
+      <a href="https://en.wikipedia.org/wiki/Radix_sort">Radix Sort</a>
     </h1>
-    <h3>Time complexity O(n²)</h3>
-    <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
+    <h3>Time complexity O(n · w)</h3>
+    <h3>w - key length</h3>
+    <h3 style="margin-bottom: 20px">Space complexity O(n + w)</h3>
     <div class="stats">
       <v-col>
         <span>{{ sketch.compsCounter }} comparisons</span>
@@ -17,34 +18,17 @@
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
     <div class="controls">
       <v-col>
-        <button
-          v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })"
-        >
+        <button v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })">
           START
         </button>
         <v-spacer></v-spacer>
         <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
-        <v-slider
-          v-model="n"
-          min="10"
-          max="2000"
-          step="10"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
-        <span style="font-size: large"
-          >Steps per second: {{ stepsPerSecond }}</span
-        >
+        <v-slider v-model="n" min="10" max="2000" step="10" color="#50fa7b" thumb-color="#f8f8f2"></v-slider>
+        <span style="font-size: large">Steps per second: {{ stepsPerSecond }}</span>
         <v-spacer></v-spacer>
-        <v-slider
-          v-model="stepsPerSecond"
-          min="100"
-          max="1000000"
-          step="100"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
+        <v-slider v-model="stepsPerSecond" min="100" max="30000" step="100" color="#50fa7b"
+          thumb-color="#f8f8f2"></v-slider>
       </v-col>
     </div>
   </div>
@@ -52,22 +36,22 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { InsertionSortSketch } from "../algos/InsertionSort";
-import { Painter } from "../utilities/painter";
+import { RadixSortSketch } from "@/algos/RadixSort";
+import { Painter } from "@/utilities/painter";
 
 export default defineComponent({
-  name: "SelectionSort",
+  name: "RadixSort",
   data: () => ({
-    canvasWidth: 2000,
-    canvasHeight: 1125,
-    sketch: {} as InsertionSortSketch,
-    n: 100,
-    stepsPerSecond: 100,
+    canvasWidth: 1920,
+    canvasHeight: 1080,
+    sketch: {} as RadixSortSketch,
+    n: 500,
+    stepsPerSecond: 1000,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
     if (canvas && Painter.isCanvas(canvas)) {
-      this.sketch = new InsertionSortSketch(canvas);
+      this.sketch = new RadixSortSketch(canvas);
       this.sketch.setup();
     }
   },
@@ -85,9 +69,11 @@ export default defineComponent({
   color: #ff79c6;
   text-decoration: none;
 }
+
 .sort-page h1 a:hover {
   text-decoration: underline;
 }
+
 .sort-page h1 a:active {
   color: #8be9fd;
   text-decoration: underline;

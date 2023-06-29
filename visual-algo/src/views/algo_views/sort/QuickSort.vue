@@ -1,13 +1,12 @@
 <template>
   <div class="sort-page">
     <h1 style="margin-top: 20px">
-      <a href="https://en.wikipedia.org/wiki/Counting_sort">Counting Sort</a>
+      <a href="https://en.wikipedia.org/wiki/Quicksort">Quick Sort</a>
     </h1>
-    <h3>Time complexity O(n + k)</h3>
-    <h3>Space complexity O(n + k)</h3>
-    <h3 style="margin-bottom: 20px">
-      k - range of the non-negative key values
-    </h3>
+    <h3>Time complexity</h3>
+    <h3>O(n²) - worst case</h3>
+    <h3>O(n log n) - average</h3>
+    <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
     <div class="stats">
       <v-col>
         <span>{{ sketch.compsCounter }} comparisons</span>
@@ -20,34 +19,17 @@
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
     <div class="controls">
       <v-col>
-        <button
-          v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })"
-        >
+        <button v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })">
           START
         </button>
         <v-spacer></v-spacer>
         <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
-        <v-slider
-          v-model="n"
-          min="10"
-          max="2000"
-          step="10"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
-        <span style="font-size: large"
-          >Steps per second: {{ stepsPerSecond }}</span
-        >
+        <v-slider v-model="n" min="10" max="2000" step="10" color="#50fa7b" thumb-color="#f8f8f2"></v-slider>
+        <span style="font-size: large">Steps per second: {{ stepsPerSecond }}</span>
         <v-spacer></v-spacer>
-        <v-slider
-          v-model="stepsPerSecond"
-          min="100"
-          max="5000"
-          step="100"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
+        <v-slider v-model="stepsPerSecond" min="100" max="10000" step="100" color="#50fa7b"
+          thumb-color="#f8f8f2"></v-slider>
       </v-col>
     </div>
   </div>
@@ -55,22 +37,22 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { CountingSortSketch } from "../algos/CountingSort";
-import { Painter } from "../utilities/painter";
+import { QuickSortSketch } from "@/algos/QuickSort";
+import { Painter } from "@/utilities/painter";
 
 export default defineComponent({
-  name: "CountingSort",
+  name: "QuickSort",
   data: () => ({
-    canvasWidth: 2000,
-    canvasHeight: 1125,
-    sketch: {} as CountingSortSketch,
+    canvasWidth: 1920,
+    canvasHeight: 1080,
+    sketch: {} as QuickSortSketch,
     n: 100,
     stepsPerSecond: 100,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
     if (canvas && Painter.isCanvas(canvas)) {
-      this.sketch = new CountingSortSketch(canvas);
+      this.sketch = new QuickSortSketch(canvas);
       this.sketch.setup();
     }
   },
@@ -88,9 +70,11 @@ export default defineComponent({
   color: #ff79c6;
   text-decoration: none;
 }
+
 .sort-page h1 a:hover {
   text-decoration: underline;
 }
+
 .sort-page h1 a:active {
   color: #8be9fd;
   text-decoration: underline;

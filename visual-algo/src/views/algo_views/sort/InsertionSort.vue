@@ -1,54 +1,33 @@
 <template>
   <div class="sort-page">
     <h1 style="margin-top: 20px">
-      <a href="https://en.wikipedia.org/wiki/Pancake_sorting">Pancake Sort</a>
+      <a href="https://en.wikipedia.org/wiki/Insertion_sort">Insertion Sort</a>
     </h1>
     <h3>Time complexity O(n²)</h3>
-    <h3>Flip operations O(n)</h3>
     <h3 style="margin-bottom: 20px">Space complexity O(1)</h3>
     <div class="stats">
       <v-col>
-        <span>{{ sketch.flipsCounter }} flips</span>
-        <v-spacer></v-spacer>
-        <span>{{ sketch.itersCounter }} iterations</span>
+        <span>{{ sketch.compsCounter }} comparisons</span>
         <v-spacer></v-spacer>
         <span v-if="sketch.values">N: {{ sketch.values.length }}</span>
         <v-spacer></v-spacer>
-        <span>Steps per frame: {{ sketch.stepsPerFrame }}</span>
+        <span>Steps per second: {{ stepsPerSecond }}</span>
       </v-col>
     </div>
     <canvas id="sketch" :width="canvasWidth" :height="canvasHeight"> </canvas>
-    <span>FPS: {{ sketch.fps }}</span>
     <div class="controls">
       <v-col>
-        <button
-          v-on:click="sketch.setup({ n: n, stepsPerFrame: stepsPerFrame })"
-        >
+        <button v-on:click="sketch.setup({ n: n, stepsPerSecond: stepsPerSecond })">
           START
         </button>
         <v-spacer></v-spacer>
         <span style="font-size: large">N: {{ n }}</span>
         <v-spacer></v-spacer>
-        <v-slider
-          v-model="n"
-          min="10"
-          max="2000"
-          step="10"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
-        <span style="font-size: large"
-          >Steps per frame: {{ stepsPerFrame }}</span
-        >
+        <v-slider v-model="n" min="10" max="2000" step="10" color="#50fa7b" thumb-color="#f8f8f2"></v-slider>
+        <span style="font-size: large">Steps per second: {{ stepsPerSecond }}</span>
         <v-spacer></v-spacer>
-        <v-slider
-          v-model="stepsPerFrame"
-          min="1"
-          max="5000"
-          step="1"
-          color="#50fa7b"
-          thumb-color="#f8f8f2"
-        ></v-slider>
+        <v-slider v-model="stepsPerSecond" min="100" max="1000000" step="100" color="#50fa7b"
+          thumb-color="#f8f8f2"></v-slider>
       </v-col>
     </div>
   </div>
@@ -56,22 +35,22 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { PancakeSortSketch } from "../algos/PancakeSort";
-import { Painter } from "../utilities/painter";
+import { InsertionSortSketch } from "@/algos/InsertionSort";
+import { Painter } from "@/utilities/painter";
 
 export default defineComponent({
-  name: "PancakeSort",
+  name: "SelectionSort",
   data: () => ({
-    canvasWidth: 2000,
-    canvasHeight: 1125,
-    sketch: {} as PancakeSortSketch,
+    canvasWidth: 1920,
+    canvasHeight: 1080,
+    sketch: {} as InsertionSortSketch,
     n: 100,
-    stepsPerFrame: 5,
+    stepsPerSecond: 100,
   }),
   mounted() {
     const canvas = document.getElementById("sketch");
     if (canvas && Painter.isCanvas(canvas)) {
-      this.sketch = new PancakeSortSketch(canvas);
+      this.sketch = new InsertionSortSketch(canvas);
       this.sketch.setup();
     }
   },
@@ -89,9 +68,11 @@ export default defineComponent({
   color: #ff79c6;
   text-decoration: none;
 }
+
 .sort-page h1 a:hover {
   text-decoration: underline;
 }
+
 .sort-page h1 a:active {
   color: #8be9fd;
   text-decoration: underline;

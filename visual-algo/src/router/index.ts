@@ -1,5 +1,5 @@
 // Composables
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
@@ -10,62 +10,62 @@ const routes = [
   {
     path: "/BubbleSort",
     name: "BubbleSort",
-    component: () => import("@/views/BubbleSort.vue"),
+    component: () => import("@/views/algo_views/sort/BubbleSort.vue"),
   },
   {
     path: "/SelectionSort",
     name: "SelectionSort",
-    component: () => import("@/views/SelectionSort.vue"),
+    component: () => import("@/views/algo_views/sort/SelectionSort.vue"),
   },
   {
     path: "/InsertionSort",
     name: "InsertionSort",
-    component: () => import("@/views/InsertionSort.vue"),
+    component: () => import("@/views/algo_views/sort/InsertionSort.vue"),
   },
   {
     path: "/BinaryInsertionSort",
     name: "BinaryInsertionSort",
-    component: () => import("@/views/BinaryInsertionSort.vue"),
+    component: () => import("@/views/algo_views/sort/BinaryInsertionSort.vue"),
   },
   {
     path: "/PancakeSort",
     name: "PancakeSort",
-    component: () => import("@/views/PancakeSort.vue"),
+    component: () => import("@/views/algo_views/sort/PancakeSort.vue"),
   },
   {
     path: "/MergeSort",
     name: "MergeSort",
-    component: () => import("@/views/MergeSort.vue"),
+    component: () => import("@/views/algo_views/sort/MergeSort.vue"),
   },
   {
     path: "/HeapSort",
     name: "HeapSort",
-    component: () => import("@/views/HeapSort.vue"),
+    component: () => import("@/views/algo_views/sort/HeapSort.vue"),
   },
   {
     path: "/ShellSort",
     name: "ShellSort",
-    component: () => import("@/views/ShellSort.vue"),
+    component: () => import("@/views/algo_views/sort/ShellSort.vue"),
   },
   {
     path: "/QuickSort",
     name: "QuickSort",
-    component: () => import("@/views/QuickSort.vue"),
+    component: () => import("@/views/algo_views/sort/QuickSort.vue"),
   },
   {
     path: "/RadixSort",
     name: "RadixSort",
-    component: () => import("@/views/RadixSort.vue"),
+    component: () => import("@/views/algo_views/sort/RadixSort.vue"),
   },
   {
     path: "/CountingSort",
     name: "CountingSort",
-    component: () => import("@/views/CountingSort.vue"),
+    component: () => import("@/views/algo_views/sort/CountingSort.vue"),
   },
   {
     path: "/DFS",
     name: "DFS",
-    component: () => import("@/views/DFS.vue"),
+    component: () => import("@/views/algo_views/graph/DFS.vue"),
   },
 ];
 
